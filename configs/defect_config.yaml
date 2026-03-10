@@ -1,0 +1,24 @@
+defects:
+  scratch:
+    depth_range: [0.1, 0.9]
+    width_px: [1, 6]
+    length_px: [20, 150]
+    angle_range: [0, 180]
+    color_shift: [-40, -10]
+
+  dent:
+    radius_range: [10, 60]
+    depth_severity: [0.2, 1.0]
+
+  contamination:
+    types: ["oil", "dust", "rust"]
+    coverage_pct: [0.01, 0.12]
+
+generation:
+  images_per_class: 500
+  defects_per_image: [1, 3]
+  clean_ratio: 0.3
+  image_size: [640, 640]
+  train_ratio: 0.7
+  val_ratio: 0.2
+  test_ratio: 0.1

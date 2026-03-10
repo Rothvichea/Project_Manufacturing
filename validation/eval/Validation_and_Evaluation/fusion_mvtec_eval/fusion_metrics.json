@@ -1,0 +1,120 @@
+{
+  "settings": {
+    "products": [
+      "bottle",
+      "screw",
+      "transistor",
+      "grid"
+    ],
+    "alpha": 0.6,
+    "fused_threshold": 0.5,
+    "device": "cuda:0",
+    "imgsz": 640,
+    "cnn_weights": "validation/runs/vgg16_cls_merged_v1/best.pt",
+    "threshold_config": "validation/results/thresholds_per_product.json"
+  },
+  "global": {
+    "confusion": {
+      "tp": 259,
+      "tn": 139,
+      "fp": 3,
+      "fn": 20
+    },
+    "metrics": {
+      "accuracy": 0.9453681710213777,
+      "precision_bad": 0.9885496183206107,
+      "recall_bad": 0.9283154121863799,
+      "f1_bad": 0.9574861367837338
+    }
+  },
+  "per_product": {
+    "bottle": {
+      "confusion": {
+        "tp": 60,
+        "tn": 20,
+        "fp": 0,
+        "fn": 3
+      },
+      "metrics": {
+        "accuracy": 0.963855421686747,
+        "precision_bad": 1.0,
+        "recall_bad": 0.9523809523809523,
+        "f1_bad": 0.975609756097561
+      },
+      "weights": "runs/detect/validation/runs/mvtec_bottle_binary_v16/weights/best.pt",
+      "yolo_threshold": 0.29,
+      "fusion_params_used": {
+        "alpha": 0.6,
+        "fused_threshold": 0.5,
+        "min_bad_score": 0.25,
+        "heatmap_threshold": 0.02
+      }
+    },
+    "screw": {
+      "confusion": {
+        "tp": 108,
+        "tn": 38,
+        "fp": 3,
+        "fn": 11
+      },
+      "metrics": {
+        "accuracy": 0.9125,
+        "precision_bad": 0.972972972972973,
+        "recall_bad": 0.907563025210084,
+        "f1_bad": 0.9391304347826087
+      },
+      "weights": "runs/detect/validation/runs/mvtec_screw_binary_v4/weights/best.pt",
+      "yolo_threshold": 0.04,
+      "fusion_params_used": {
+        "alpha": 0.6,
+        "fused_threshold": 0.5,
+        "min_bad_score": 0.04,
+        "heatmap_threshold": 0.02
+      }
+    },
+    "transistor": {
+      "confusion": {
+        "tp": 34,
+        "tn": 60,
+        "fp": 0,
+        "fn": 6
+      },
+      "metrics": {
+        "accuracy": 0.94,
+        "precision_bad": 1.0,
+        "recall_bad": 0.85,
+        "f1_bad": 0.9189189189189189
+      },
+      "weights": "runs/detect/validation/runs/mvtec_transistor_binary_v23/weights/best.pt",
+      "yolo_threshold": 0.01,
+      "fusion_params_used": {
+        "alpha": 0.55,
+        "fused_threshold": 0.45,
+        "min_bad_score": 0.01,
+        "heatmap_threshold": 0.02
+      }
+    },
+    "grid": {
+      "confusion": {
+        "tp": 57,
+        "tn": 21,
+        "fp": 0,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision_bad": 1.0,
+        "recall_bad": 1.0,
+        "f1_bad": 1.0
+      },
+      "weights": "runs/detect/validation/runs/mvtec_grid_binary_v1/weights/best.pt",
+      "yolo_threshold": 0.02,
+      "fusion_params_used": {
+        "alpha": 0.6,
+        "fused_threshold": 0.5,
+        "min_bad_score": 0.02,
+        "heatmap_threshold": 0.02
+      }
+    }
+  }
+}

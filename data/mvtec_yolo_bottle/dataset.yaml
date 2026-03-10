@@ -1,0 +1,7 @@
+path: /home/genji/Project_Manufacturing/data/mvtec_yolo_bottle
+train: train/images
+val: val/images
+test: test/images
+nc: 1
+names:
+  0: defect

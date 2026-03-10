@@ -1,0 +1,51 @@
+# ── Virtual environment ──────────────────────────────────────────
+venv/
+
+# ── Base YOLO weights (download separately) ──────────────────────
+yolov8s.pt
+yolo26n.pt
+
+# ── Raw & generated datasets (too large / MVTec license) ─────────
+data/mvtec/
+data/raw_products/
+data/generated/
+data/output_previews/
+data/mvtec_cls_merged/
+data/mvtec_yolo_defect/
+data/mvtec_yolo_merged4/
+
+# ── YOLO dataset images (MVTec license — keep only labels+yaml) ───
+data/mvtec_yolo_bottle/train/images/
+data/mvtec_yolo_bottle/val/images/
+data/mvtec_yolo_bottle/test/images/
+data/mvtec_yolo_screw/train/images/
+data/mvtec_yolo_screw/val/images/
+data/mvtec_yolo_screw/test/images/
+data/mvtec_yolo_transistor/train/images/
+data/mvtec_yolo_transistor/val/images/
+data/mvtec_yolo_transistor/test/images/
+data/mvtec_yolo_grid/train/images/
+data/mvtec_yolo_grid/val/images/
+data/mvtec_yolo_grid/test/images/
+
+# ── Training runs: keep only the 4 best.pt weights ───────────────
+runs/
+!runs/detect/validation/runs/mvtec_bottle_binary_v16/weights/best.pt
+!runs/detect/validation/runs/mvtec_screw_binary_v4/weights/best.pt
+!runs/detect/validation/runs/mvtec_transistor_binary_v23/weights/best.pt
+!runs/detect/validation/runs/mvtec_grid_binary_v1/weights/best.pt
+
+# ── Python cache ──────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+
+# ── Claude internal ───────────────────────────────────────────────
+.claude/
+
+# ── YOLO cache files ─────────────────────────────────────────────
+*.cache
+
+# ── OS / editor ───────────────────────────────────────────────────
+.DS_Store
+*.swp
