@@ -52,26 +52,50 @@ On top of that, a **Gaussian confidence heatmap** is generated from all YOLO det
 ### Fusion Pipeline
 
 ```
-Input Image
-    ↓
-Product Router → selects correct YOLOv8 model
-    ↓
-YOLOv8 (fine-tuned per product)
-    │  bounding boxes + confidence scores
-    ↓
-VGG16 CNN classifier
-    │  defect probability score
-    ↓
-Weighted Score Fusion
-    │  α × YOLO_score + (1−α) × CNN_score  (α tuned per product)
-    ↓
-Gaussian Confidence Heatmap
-    │  spatial defect probability map
-    ↓
-heatmap_priority decision rule
-    │  if heatmap fires → BAD override
-    ↓
-GOOD / BAD verdict + annotated output image
+┌─────────────────────────────────────────────┐
+│              Input Image                    │
+└─────────────────────┬───────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────┐
+│           Product Router                    │
+│     selects the right YOLOv8 model          │
+└──────────┬──────────────────────────────────┘
+           │
+     ┌─────┴─────┐
+     ▼           ▼
+┌─────────┐ ┌─────────┐
+│ YOLOv8  │ │  VGG16  │   ← run in parallel
+│ boxes + │ │ defect  │
+│ scores  │ │  prob.  │
+└────┬────┘ └────┬────┘
+     │           │
+     └─────┬─────┘
+           ▼
+┌─────────────────────────────────────────────┐
+│           Weighted Score Fusion             │
+│    α × YOLO_score + (1−α) × CNN_score       │
+│          (α tuned per product)              │
+└─────────────────────┬───────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────┐
+│        Gaussian Confidence Heatmap          │
+│       spatial defect probability map        │
+└─────────────────────┬───────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────┐
+│         heatmap_priority decision           │
+│    heatmap fires?  →  BAD override          │
+│    heatmap silent? →  use fusion score      │
+└─────────────────────┬───────────────────────┘
+                      │
+           ┌──────────┴──────────┐
+           ▼                     ▼
+     ✅  GOOD              ❌  BAD
+                         + bounding box
+                         + heatmap overlay
 ```
 
 The fusion of YOLO (localisation strength) and VGG16 (classification strength) consistently outperforms either model alone, especially on the transistor category where defects are subtle and non-textured.
